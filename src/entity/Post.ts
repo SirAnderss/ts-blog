@@ -9,14 +9,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Categories } from './Category';
-import { Comments } from './Comment';
-import { Scores } from './Score';
-import { Tags } from './Tag';
-import { Users } from './User';
+import { Category } from './Category';
+import { Comment } from './Comment';
+import { Score } from './Score';
+import { Tag } from './Tag';
+import { User } from './User';
 
-@Entity()
-export class Posts {
+@Entity({ name: 'posts' })
+export class Post {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -28,21 +28,21 @@ export class Posts {
   })
   content: string;
 
-  @ManyToOne(() => Users, user => user.posts)
-  user: Users;
+  @ManyToOne(() => User, user => user.posts)
+  user: User;
 
-  @ManyToOne(() => Categories, category => category.posts)
-  category: Categories;
+  @ManyToOne(() => Category, category => category.posts)
+  category: Category;
 
-  @OneToMany(() => Comments, comments => comments.post)
-  comments: Comments[];
+  @OneToMany(() => Comment, comments => comments.post)
+  comments: Comment[];
 
-  @OneToMany(() => Scores, scores => scores.post)
-  scores: Scores[];
+  @OneToMany(() => Score, scores => scores.post)
+  scores: Score[];
 
-  @ManyToMany(() => Tags)
+  @ManyToMany(() => Tag)
   @JoinTable()
-  tags: Tags[];
+  tags: Tag[];
 
   @CreateDateColumn({ nullable: true })
   createdAt: Date;

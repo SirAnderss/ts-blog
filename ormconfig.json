@@ -6,7 +6,10 @@
   "password": "",
   "database": "hrdev-blog",
   "entities": [
-    "build/entity/**.js"
+    "build/entity/**/*.js"
+  ],
+  "migrations": [
+    "build/migrations/**/*.js"
   ],
   "logging": false,
   "synchronize": true

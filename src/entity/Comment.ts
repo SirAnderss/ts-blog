@@ -6,10 +6,10 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { Posts } from './Post';
+import { Post } from './Post';
 
-@Entity()
-export class Comments {
+@Entity({ name: 'comments' })
+export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,8 +18,8 @@ export class Comments {
   })
   name: string;
 
-  @ManyToOne(() => Posts, post => post.comments)
-  post: Posts;
+  @ManyToOne(() => Post, post => post.comments)
+  post: Post;
 
   @CreateDateColumn({ nullable: true })
   createdAt: Date;
